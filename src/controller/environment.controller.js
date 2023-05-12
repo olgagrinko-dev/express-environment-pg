@@ -8,4 +8,5 @@ route.get('/', async (request, response) => {
     response.send(data);
 });
 
+
 module.exports = route;

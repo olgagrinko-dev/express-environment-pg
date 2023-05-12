@@ -1,4 +1,4 @@
-const { getAllEnvironmentDb } = require('../repository/environment.repository');
+const { getAllEnvironmentDb } = require('../repository/environment.repository')
 
 async function getAllEnvironment() {
     const data = await getAllEnvironmentDb();
