@@ -7,4 +7,12 @@ async function getAllEnvironmentDb() {
     return result;
 }
 
-module.exports = {getAllEnvironmentDb};
+async function getEnvironmentByIdDb() {
+    const client = await pool.connect();
+    const sql = 'select id environment';
+    const result = (await client.query(sql)).rows;
+    return result;
+}
+
+
+module.exports = {getAllEnvironmentDb, getEnvironmentByIdDb};
