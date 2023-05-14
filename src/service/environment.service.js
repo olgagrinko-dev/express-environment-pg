@@ -6,9 +6,8 @@ async function getAllEnvironment() {
 }
 
 async function getEnvironmentById(id) {  
-    const data = await getEnvironmentByIdDb();
-    const filtered = data.filter((elem) => elem.id == id);
-    return filtered;
+    const data = await getEnvironmentByIdDb(id);   
+    return data;
 }
 
 module.exports = { getAllEnvironment, getEnvironmentById };
