@@ -1,7 +1,6 @@
 const { getAllEnvironmentDb, getEnvironmentByIdDb, createEnvironmentDb, upDataEnvironmentDb, deleteEnvironmentDb } = require('../repository/environment.repository')
 
-async function getAllEnvironment() {
-    
+async function getAllEnvironment() {    
     const data = await getAllEnvironmentDb();
     return data;
 }
