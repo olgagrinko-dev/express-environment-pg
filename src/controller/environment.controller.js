@@ -1,55 +1,57 @@
 const express = require('express');
 const { getAllEnvironment, getEnvironmentById, createEnvironment, upDataEnvironment, deleteEnvironment } = require('../service/environment.service');
+const { isValidEnvironmentId, isValidEnvironmentBody } = require('../helper/validation');
+const { buildResponse } = require('../helper/buildResponse');
 
 const route = express.Router();
 
 route.get('/', async (request, response) => {
   try {
     const data = await getAllEnvironment();
-    response.status(200).send(data);
+    buildResponse(response, 200, data);
   } catch (error) {
-    response.status(404).send(error.message);
+    buildResponse(response, 404, error.message);
   }
 });
 
-route.get('/:id', async (request, response) => {
+route.get('/:id', isValidEnvironmentId, async (request, response) => {
   try {
     const { id } = request.params;
     const data = await getEnvironmentById(id);
-    response.status(200).send(data);
+    buildResponse(response, 200, data);
   } catch (error) {
-    response.status(404).send(error.message);
+    buildResponse(response, 404, error.message);
   }
 });
 
-route.post('/', async (request, response) => {
+route.post('/', isValidEnvironmentBody, async (request, response) => {
   try {
     const { label, category, priority } = request.body;
     const data = await createEnvironment(label, category, priority);
-    response.status(200).send(data);
+    buildResponse(response, 200, data);
   } catch (error) {
-    response.status(404).send(error.message);
+    buildResponse(response, 404, error.message);
   }
 });
 
-route.put('/:id', async (request, response) => {
+route.put('/:id', isValidEnvironmentId, isValidEnvironmentBody, async (request, response) => {
   try {
     const { id } = request.params;
     const { label, category, priority } = request.body;
     const data = await upDataEnvironment(id, label, category, priority);
-    response.status(200).send(data);
+    buildResponse(response, 200, data);
   } catch (error) {
-    response.status(404).send(error.message);
+    buildResponse(response, 404, error.message);
   }
 });
 
-route.delete('/:id', async (request, response) => {
+route.delete('/:id', isValidEnvironmentId, async (request, response) => {
   try {
     const { id } = request.params;
     const data = await deleteEnvironment(id);
-    response.status(200).send(data);
+    buildResponse(response, 200, data);
   } catch (error) {
-    response.status(404).send(error.message);
+    buildResponse(response, 404, error.message);
   }
 });
 
